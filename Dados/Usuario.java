@@ -1,4 +1,3 @@
-/* statusCadastro, get dos itens, private Certificado */
 import java.time.LocalDate;
 import java.util.ArrayList;
 

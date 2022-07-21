@@ -7,13 +7,21 @@ class Maquina{
   private String descricao;
 
   public Maquina(int id, String marca, String modelo, ClasseMaquina classe, String descricao){
-    this.id = id;
-    this.marca = marca;
-    this.modelo = modelo;
-    this.classe = classe;
-    this.descricao = descricao;
+    if (classe!=null){
+      this.id = id;
+      this.marca = marca;
+      this.modelo = modelo;
+      this.classe = classe;
+      this.descricao = descricao;
+    } else{
+      this.id = 0;
+      this.marca = null;
+      this.modelo = null;
+      this.classe = null;
+      this.descricao = null;
+    }
   }
-
+  
   public int getId() {
       return id;
   }

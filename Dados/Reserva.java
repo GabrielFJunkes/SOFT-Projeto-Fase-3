@@ -1,6 +1,6 @@
 import java.time.LocalDate;
 import java.time.LocalTime;
-/* Maquina maquina */
+
 class Reserva{
 
   private int id;
@@ -11,12 +11,21 @@ class Reserva{
   private Maquina maquina;
 
   public Reserva(int id, LocalDate data, LocalTime horarioInicio, LocalTime horarioFim, Usuario usuario, Maquina maquina){
-    this.id = id;
-    this.data = data;
-    this.horarioInicio = horarioInicio;
-    this.horarioFim = horarioFim;
-    this.usuario = usuario;
-    this.maquina = maquina;
+    if (usuario.isStatusCadastro()){
+      this.id = id;
+      this.data = data;
+      this.horarioInicio = horarioInicio;
+      this.horarioFim = horarioFim;
+      this.usuario = usuario;
+      this.maquina = maquina;
+    }else{
+      this.id = 0;
+      this.data = null;
+      this.horarioInicio = null;
+      this.horarioFim = null;
+      this.usuario = null;
+      this.maquina = null;
+    }
   }
 
   public int getId() {
@@ -49,6 +58,14 @@ class Reserva{
 
   public void setHorarioFim(LocalTime horarioFim) {
       this.horarioFim = horarioFim;
+  }
+  
+  public boolean conflita(Reserva reserva){
+    return ( this.data.isEqual(reserva.data) && this.maquina==reserva.maquina &&
+            ((this.horarioInicio.compareTo(reserva.horarioInicio)<=0 && this.horarioFim.compareTo(reserva.horarioInicio)>=0)
+            ||
+            (this.horarioInicio.compareTo(reserva.horarioFim)<=0 && this.horarioFim.compareTo(reserva.horarioFim)>=0))
+    );
   }
     
 }
